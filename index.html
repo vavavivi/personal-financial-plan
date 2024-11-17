@@ -5,16 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coaching 1:1 kế hoạch tài chính cá nhân</title>
     <style>
-        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f4; margin: 0; }
-        .chat-container { max-width: 600px; width: 100%; border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-        .chat-box { height: 400px; overflow-y: auto; padding: 10px; border: 1px solid #eaeaea; margin-bottom: 15px; }
-        .user-msg, .bot-msg { margin-bottom: 10px; padding: 8px; border-radius: 4px; }
-        .user-msg { background-color: #d4f0fc; text-align: right; }
-        .bot-msg { background-color: #f0f0f0; text-align: left; }
-        .input-box { display: flex; }
-        input[type="text"], input[type="number"] { flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; }
-        button { padding: 10px; border: none; background-color: #007bff; color: #fff; border-radius: 4px; cursor: pointer; }
-        .form-container { margin-bottom: 20px; }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 10px; /* Added padding for mobile screens */
+            box-sizing: border-box;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #eaeaea;
+            margin-bottom: 15px;
+            max-height: 50vh; /* Set max height to make it more mobile-friendly */
+        }
+
+        .user-msg, .bot-msg {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .user-msg {
+            background-color: #d4f0fc;
+            text-align: right;
+        }
+
+        .bot-msg {
+            background-color: #f0f0f0;
+            text-align: left;
+        }
+
+        .input-box {
+            display: flex;
+            width: 100%;
+            align-items: center;
+        }
+
+        input[type="text"], input[type="number"], textarea {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        textarea {
+            height: 80px; /* Make textarea more mobile-friendly */
+            resize: vertical;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .form-container {
+            margin-bottom: 20px;
+        }
+
+        /* Mobile-specific styling */
+        @media (max-width: 768px) {
+            .chat-container {
+                padding: 15px; /* Reduce padding for smaller screens */
+            }
+
+            .chat-box {
+                height: auto; /* Make chatbox height auto on mobile */
+                max-height: 40vh;
+            }
+
+            input[type="text"], input[type="number"], textarea {
+                font-size: 16px; /* Larger font size for better readability */
+                padding: 12px; /* Larger padding for touch */
+            }
+
+            button {
+                width: 100%; /* Make button full width on small screens */
+                font-size: 16px;
+                margin-top: 10px;
+            }
+        }
+
+        /* Styles for iPhone 16 and similar screen sizes (large mobile devices) */
+        @media (max-width: 414px) {
+            .chat-box {
+                max-height: 60vh; /* Increase height for more space */
+            }
+
+            .input-box input, .input-box button {
+                font-size: 14px; /* Adjust font size for iPhone 16 */
+            }
+
+            input[type="text"], input[type="number"], textarea {
+                font-size: 16px;
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -25,13 +135,13 @@
         <input type="number" id="income" placeholder="Thu nhập (tr)" />
         <input type="number" id="year" placeholder="Năm sinh" />
         <input type="number" id="spendMonthly" placeholder="Chi tiêu hàng tháng (tr)" />
-        <textarea id="assets" placeholder="Tài sản hiện có"></textarea>        
+        <textarea id="assets" placeholder="Tài sản hiện có"></textarea>
         <textarea id="financialGoals" placeholder="Rủi ro"></textarea>
         <button onclick="saveInitialData()">Lưu thông tin</button>
     </div>
 
-
     <div class="chat-box" id="chatBox"></div>
+
     <div class="input-box">
         <input type="text" id="userInput" placeholder="Mục tiêu tài chính " disabled />
         <button onclick="sendMessage()" disabled>Send</button>
