@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaching 1:1 kế hoạch tài chính cá nhân</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f4; margin: 0; }
+        .chat-container { max-width: 600px; width: 100%; border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .chat-box { height: 400px; overflow-y: auto; padding: 10px; border: 1px solid #eaeaea; margin-bottom: 15px; }
+        .user-msg, .bot-msg { margin-bottom: 10px; padding: 8px; border-radius: 4px; }
+        .user-msg { background-color: #d4f0fc; text-align: right; }
+        .bot-msg { background-color: #f0f0f0; text-align: left; }
+        .input-box { display: flex; }
+        input[type="text"], input[type="number"] { flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; }
+        button { padding: 10px; border: none; background-color: #007bff; color: #fff; border-radius: 4px; cursor: pointer; }
+        .form-container { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="form-container" id="formContainer">
+        <h3>Nhập thông tin tài chính</h3>
+        <input type="number" id="income" placeholder="Thu nhập" />
+        <input type="number" id="year" placeholder="Năm sinh" />
+        <input type="number" id="assets" placeholder="Tài sản hiện có" />
+        <input type="number" id="spendMonthly" placeholder="Chi tiêu hàng tháng" />
+        <input type="text" id="financialGoals" placeholder="Mục tiêu tài chính" />
+        <button onclick="saveInitialData()">Lưu thông tin</button>
+    </div>
+
+    <div class="chat-box" id="chatBox"></div>
+    <div class="input-box">
+        <input type="text" id="userInput" placeholder="Type a message..." disabled />
+        <button onclick="sendMessage()" disabled>Send</button>
+    </div>
+</div>
+
+<script src="chatbot.js"></script>
+</body>
+</html>
