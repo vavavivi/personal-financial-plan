@@ -42,7 +42,7 @@ async function sendMessage() {
     const financialGoals = localStorage.getItem("financialGoals");
 
     try {
-        const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=YOUR_API_KEY", {
+        const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCn4fx3boQ_qoWTrQIC_f1ZkZfW0VyEB5U", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
