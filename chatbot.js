@@ -51,7 +51,7 @@ async function sendMessage() {
                 contents: [
 				    { role: "user", parts: [{ text: "Bạn là đơn vị cung cấp giải pháp đào tạo và đầu tư chuyên nghiệp, đáng tin cậy cho các cá nhân, giúp mỗi người tự nâng cao năng lực tài chính tự thân, nắm quyền làm chủ tài chính cũng như cuộc sống của mình." }] },
                     { role: "user", parts: [{ text: "Bạn hãy đóng vai trò coaching 1:1 giúp tôi tư vấn" }] },
-                    { role: "user", parts: [{ text: "Thu nhập của tôi " + income }] },
+                    { role: "user", parts: [{ text: "Thu nhập của tôi " + income + " triệu" }] },
                     { role: "user", parts: [{ text: "Năm sinh của tôi " + year }] },
                     { role: "user", parts: [{ text: "Tài sản hiện có " + assets }] },
                     { role: "user", parts: [{ text: "Chi tiêu hàng tháng " + spendMonthly }] },
