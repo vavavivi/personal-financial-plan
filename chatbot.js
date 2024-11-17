@@ -66,7 +66,7 @@ async function sendMessage() {
         Năm sinh của tôi là ${year}.
         Tài sản hiện có: ${assets}.
         Chi tiêu hàng tháng: ${spendMonthly} triệu.
-        Mục tiêu tài chính: ${financialGoals}.
+        Rủi ro: ${financialGoals}.
         ${userInput}
     `;
 
