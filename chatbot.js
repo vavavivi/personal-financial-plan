@@ -22,10 +22,7 @@ function saveInitialData() {
     const spendMonthly = document.getElementById("spendMonthly").value;
     const financialGoals = document.getElementById("financialGoals").value;
 
-    if (!income || !year || !assets || !spendMonthly || !financialGoals) {
-        alert("Vui lòng nhập đầy đủ thông tin!");
-        return;
-    }
+    
 
     // Lưu vào localStorage
     localStorage.setItem("income", income);
