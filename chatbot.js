@@ -18,11 +18,13 @@ function saveInitialData() {
     localStorage.setItem("spendMonthly", spendMonthly);
     localStorage.setItem("financialGoals", financialGoals);
 
-    sendMessage();
     // Hiển thị hộp chat và kích hoạt input
     document.getElementById("formContainer").style.display = "none";
     document.getElementById("userInput").disabled = false;
     document.querySelector(".input-box button").disabled = false;
+
+    // Gửi tin nhắn tự động sau khi lưu thông tin
+    sendMessage();
 }
 
 // Hàm gửi tin nhắn
@@ -53,7 +55,7 @@ async function sendMessage() {
     `;
 
     try {
-        const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=YOUR_API_KEY", {
+        const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCn4fx3boQ_qoWTrQIC_f1ZkZfW0VyEB5U", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -88,3 +90,16 @@ function displayMessage(text, className) {
     chatBox.appendChild(messageDiv);
     chatBox.scrollTop = chatBox.scrollHeight; // Auto scroll to the bottom
 }
+
+// Lắng nghe sự kiện nhấn phím Enter để gửi tin nhắn
+document.getElementById("userInput").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();  // Ngăn không cho tạo dòng mới khi nhấn Enter
+        sendMessage();  // Gửi tin nhắn khi nhấn Enter
+    }
+});
+
+// Lắng nghe sự kiện click vào nút "Send"
+document.querySelector(".input-box button").addEventListener("click", function() {
+    sendMessage();  // Gửi tin nhắn khi nhấn nút "Send"
+});
