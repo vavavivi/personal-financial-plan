@@ -1,3 +1,19 @@
+function convertToHtml(text) {
+    // Chuyển đổi các phần nhấn mạnh (bold) trong văn bản thành thẻ <strong>
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    // Chuyển đổi các phần danh sách (list) thành thẻ <ul> và <li>
+    text = text.replace(/(?:\* (.*))/g, '<li>$1</li>');
+    
+    // Chuyển đổi các đoạn văn thành thẻ <p>
+    text = text.replace(/\n/g, '<p></p>'); // Mỗi dòng mới sẽ là một đoạn <p>
+
+    // Nếu bạn muốn thêm danh sách vào trong <ul>
+    text = text.replace(/<li>/g, '<ul><li>').replace(/<\/li>/g, '</li></ul>');
+
+    return text;
+}
+
 // Lưu thông tin vào localStorage
 function saveInitialData() {
     const income = document.getElementById("income").value;
@@ -86,7 +102,7 @@ function displayMessage(text, className) {
     const chatBox = document.getElementById("chatBox");
     const messageDiv = document.createElement("div");
     messageDiv.className = className;
-    messageDiv.textContent = text;
+    messageDiv.innerHTML  = convertToHtml(text);
     chatBox.appendChild(messageDiv);
     chatBox.scrollTop = chatBox.scrollHeight; // Auto scroll to the bottom
 }
