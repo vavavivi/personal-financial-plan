@@ -54,7 +54,7 @@ async function sendMessage() {
                     { role: "user", parts: [{ text: "Thu nhập của tôi " + income + " triệu" }] },
                     { role: "user", parts: [{ text: "Năm sinh của tôi " + year }] },
                     { role: "user", parts: [{ text: "Tài sản hiện có " + assets }] },
-                    { role: "user", parts: [{ text: "Chi tiêu hàng tháng " + spendMonthly }] },
+                    { role: "user", parts: [{ text: "Chi tiêu hàng tháng " + spendMonthly + " triệu" }] },
                     { role: "user", parts: [{ text: "Mục tiêu tài chính " + financialGoals }] },
                     { role: "user", parts: [{ text: userInput }] }
                 ]
