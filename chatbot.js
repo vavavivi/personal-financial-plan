@@ -1,3 +1,30 @@
+// Lưu thông tin vào localStorage
+function saveInitialData() {
+    const income = document.getElementById("income").value;
+    const year = document.getElementById("year").value;
+    const assets = document.getElementById("assets").value;
+    const spendMonthly = document.getElementById("spendMonthly").value;
+    const financialGoals = document.getElementById("financialGoals").value;
+
+    if (!income || !year || !assets || !spendMonthly || !financialGoals) {
+        alert("Vui lòng nhập đầy đủ thông tin!");
+        return;
+    }
+
+    // Lưu vào localStorage
+    localStorage.setItem("income", income);
+    localStorage.setItem("year", year);
+    localStorage.setItem("assets", assets);
+    localStorage.setItem("spendMonthly", spendMonthly);
+    localStorage.setItem("financialGoals", financialGoals);
+
+    sendMessage();
+    // Hiển thị hộp chat và kích hoạt input
+    document.getElementById("formContainer").style.display = "none";
+    document.getElementById("userInput").disabled = false;
+    document.querySelector(".input-box button").disabled = false;
+}
+
 // Hàm gửi tin nhắn
 async function sendMessage() {
     const userInput = document.getElementById("userInput").value;
