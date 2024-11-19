@@ -14,6 +14,16 @@ function convertToHtml(text) {
     return text;
 }
 
+function saveSession(context, messages) {
+    const session = { context, messages };
+    localStorage.setItem("chatSession", JSON.stringify(session));
+}
+
+function loadSession() {
+    const session = localStorage.getItem("chatSession");
+    return session ? JSON.parse(session) : { context: "", messages: [] };
+}
+
 // Lưu thông tin vào localStorage
 function saveInitialData() {
     const income = document.getElementById("income").value;
@@ -30,7 +40,7 @@ function saveInitialData() {
     localStorage.setItem("assets", assets);
     localStorage.setItem("spendMonthly", spendMonthly);
     localStorage.setItem("financialGoals", financialGoals);
-
+    localStorage.removeItem("chatSession");
     // Hiển thị hộp chat và kích hoạt input
     document.getElementById("formContainer").style.display = "none";
     document.getElementById("userInput").disabled = false;
@@ -68,29 +78,53 @@ async function sendMessage() {
     `;
 
     try {
+        let { context, messages } = loadSession();
+        if (!context) {
+            context = "Tư vấn tài chính cá nhân";
+            messages = [];
+        }
+        const data =await sendQuery(context, messages, userInput);
+        const botMessage = data.candidates[0].content.parts[0].text;
+
+        displayMessage(botMessage, "bot-msg");
+
+        messages.push({ role: "user", content: query });
+        messages.push({ role: "bot", content: response.candidates[0].content });
+
+        saveSession(context, messages);
+
+    } catch (error) {
+        console.error("Error:", error);
+        displayMessage("Xin lỗi, đã xảy ra lỗi.", "bot-msg");
+    }
+}
+
+async function sendQuery(context, messages, query) {
+    const payload = {
+        prompt: {
+            context: context, // Ngữ cảnh ban đầu
+            messages: messages // Lịch sử hội thoại
+        },
+        query: query // Truy vấn hiện tại
+    };
+
+    try {
         const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCn4fx3boQ_qoWTrQIC_f1ZkZfW0VyEB5U", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                contents: [
-                    {
-                        role: "user",
-                        parts: [{ text: combinedText.trim() }]
-                    }
-                ]
-            })
+            body: JSON.stringify(payload),
         });
 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
-        const botMessage = data.candidates[0].content.parts[0].text;
-
-        displayMessage(botMessage, "bot-msg");
-
+        return data;
     } catch (error) {
         console.error("Error:", error);
-        displayMessage("Xin lỗi, đã xảy ra lỗi.", "bot-msg");
     }
 }
 
